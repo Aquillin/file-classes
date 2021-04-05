@@ -5,6 +5,7 @@
   "author": "Aquillin <77700878+Aquillin@users.noreply.github.com>",
   "license": "MIT",
   "private": false,
+  "main": "dist/index.js",
   "dependencies": {
     "fs-extra": "^9.1.0",
     "lodash": "^4.17.21"
@@ -24,6 +25,6 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc --outDir=production"
+    "build": "tsc"
   }
 }

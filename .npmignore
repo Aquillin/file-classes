@@ -1,4 +1,4 @@
+node_modules
 src/*
-jest.config.ts
-babel.config.js
-babel.config.js
+*.config.[jt]s
+tsconfig.json
