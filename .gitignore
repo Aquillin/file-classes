@@ -104,5 +104,6 @@ dist
 .tern-port
 
 # File-Classes
+**/*.spec.temp
 **/*.spec.json
 dist

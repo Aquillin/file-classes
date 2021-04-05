@@ -13,7 +13,7 @@ describe('JsonFile', () => {
         message: 'Hello world!',
     };
     const TEST_DATA = { hey: 'WORLD' };
-    const FILEPATH = join(__dirname, './JsonFile.spec.json');
+    const FILEPATH = join(__dirname, 'JsonFile.spec.temp');
     let file: JsonFile<typeof DEFAULT_DATA>;
 
     beforeAll(() => {
