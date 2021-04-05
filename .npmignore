@@ -1,0 +1,4 @@
+src/*
+jest.config.ts
+babel.config.js
+babel.config.js
