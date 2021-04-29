@@ -37,17 +37,17 @@ export class JsonFile<J extends JsonObject> extends File<JsonObject> {
         const parts = ref.split('.');
         let curr = this.data;
 
-        for(let i = 0; i < parts.length - 1; i++) {
+        for (let i = 0; i < parts.length - 1; i++) {
             let key = parts[i];
-            if(curr.hasOwnProperty(key)) {
+            if (curr.hasOwnProperty(key)) {
                 curr = curr[key];
             } else {
-                throw new Error("Invalid object property reference given!");
+                throw new Error('Invalid object property reference given!');
             }
         }
 
         const target_key = parts[parts.length - 1];
-        delete curr[target_key]
+        delete curr[target_key];
         this.write(this.data);
     }
 
