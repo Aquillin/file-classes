@@ -103,7 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-# File-Classes
+# File-Classes specific ignores
 **/*.spec.temp
 **/*.spec.json
 dist
+*.tgz
+NOTE.md
