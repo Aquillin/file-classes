@@ -1,7 +1,7 @@
 {
     "name": "file-classes",
     "description": "Class abstractions for frequently used filetypes.",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "repository": "git@github.com-Aquillin:Aquillin/file-classes.git",
     "author": "Aquillin <77700878+Aquillin@users.noreply.github.com>",
     "license": "MIT",
