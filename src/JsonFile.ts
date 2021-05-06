@@ -30,6 +30,7 @@ export class JsonFile<J extends JsonObject> extends File<JsonObject> {
         const parts = ref.split('.');
         const ppath = new PropertyPath(parts);
         ppath.updateValueOn(this.data, val);
+        super.write(this.data);
     }
 
     public removeVal(ref: string) {
@@ -37,7 +38,7 @@ export class JsonFile<J extends JsonObject> extends File<JsonObject> {
         const ppath = new PropertyPath(parts);
         
         ppath.removeValueFrom(this.data);
-        this.write(this.data);
+        super.write(this.data);
     }
 
     public toRaw(data: JsonObject): string {

@@ -1,6 +1,5 @@
 import yaml from "yaml";
-
-import { JsonFile } from ".";
+import { JsonFile } from "./JsonFile";
 import { JsonObject } from "./JsonFile";
 
 export class YamlFile<T extends JsonObject> extends JsonFile<T> {

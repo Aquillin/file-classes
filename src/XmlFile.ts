@@ -1,8 +1,6 @@
 import xmlJs from 'xml-js';
-import { JsonFile } from '.';
 import { accessProperty } from './json-util/Json.util';
-import { JsonObject } from './JsonFile';
-import PropertyPath from './property-path/PropertyPath';
+import { JsonFile, JsonObject } from './JsonFile';
 
 export class XmlFile<T extends JsonObject> extends JsonFile<T> {
     public getVal<U>(ref: string) {
@@ -50,6 +48,8 @@ export class XmlFile<T extends JsonObject> extends JsonFile<T> {
     }
 
     public toRaw(data: JsonObject): string {
-        return xmlJs.js2xml(data);
+        return xmlJs.js2xml(data, {
+            compact: true
+        });
     }
 }

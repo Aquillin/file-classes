@@ -116,7 +116,7 @@ describe('XmlFile class', () => {
             </plugin>
           </plugins>
         </build>
-                    </project>`
+                    </project>`;
         mockedFs.existsSync.mockImplementation(() => true);
         mockedFs.writeFileSync.mockImplementation((path, data) => {
             mockData = data.toString();
@@ -167,5 +167,29 @@ describe('XmlFile class', () => {
     test('removeXmlAttr works', () => {
         xml.removeXmlAttr('project', 'xmlns');
         expect(xml.getXmlAttr('project', 'xmlns')).toBe(undefined);
+    });
+
+    test('toData properly converts an XML string to JSON', () => {
+        const data = xml.toData(
+            Buffer.from('<project attr="true"><child>Hello!</child></project>')
+        );
+        expect(data).toEqual({
+            project: {
+                _attributes: { attr: 'true' },
+                child: { _text: 'Hello!' },
+            },
+        });
+    });
+
+    test('toRaw properly converts JSON to xml', () => {
+        const raw = xml.toRaw({
+            project: {
+                _attributes: { attr: 'true' },
+                child: { _text: 'Hello!' },
+            },
+        });
+
+        const EXPECTED_OUTPUT = '<project attr="true"><child>Hello!</child></project>'.trim();
+        expect(raw).toBe(EXPECTED_OUTPUT)
     });
 });
