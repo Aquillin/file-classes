@@ -136,11 +136,11 @@ describe('XmlFile class', () => {
     });
 
     test('AddObjectTo Works', async () => {
-        xml.addObjectTo(
+        await xml.addObjectTo(
             { UPDATED: true },
             'project.dependencies.dependency'
         ).then(() => {
-            const deps = xml.getVal<JsonObject[]>(
+            const deps = xml.getProperty<JsonObject[]>(
                 'project.dependencies.dependency'
             );
 
@@ -149,6 +149,8 @@ describe('XmlFile class', () => {
                 let dep = deps[depKey];
                 if (dep['UPDATED'] === true) updated = true;
             }
+
+
             expect(updated).toBe(true);
         });
     });
