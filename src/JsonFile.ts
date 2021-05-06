@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { File } from './File';
+import PropertyPath from './property-path/PropertyPath';
 
 export type JsonObject = { [key: string]: any };
 
@@ -9,8 +10,9 @@ export class JsonFile<J extends JsonObject> extends File<JsonObject> {
     }
 
     /**
-     * Merges the provided data:JsonObject into this JsonFile.
-     * JSON objects in the original file will not get deleted.
+     * Merges the provided data JsonObject into this JsonFile.
+     * Writes the merged data to file.
+     * Uses the lodash .merge method to merge data.
      *
      * @param data - A generic JsonObject to merge.
      */
@@ -20,35 +22,23 @@ export class JsonFile<J extends JsonObject> extends File<JsonObject> {
 
     public getVal<U>(ref: string) {
         const parts = ref.split('.');
-        let curr = { ...this.data };
+        const ppath = new PropertyPath(parts);
+        return ppath.resolve(this.data) as U;
+    }
 
-        for (let i = 0; i < parts.length; i++) {
-            let key = parts[i];
-            if (curr.hasOwnProperty(key)) {
-                curr = curr[key];
-            } else {
-                return undefined;
-            }
-        }
-        return curr as U;
+    public updateVal(ref: string, val: any) {
+        const parts = ref.split('.');
+        const ppath = new PropertyPath(parts);
+        ppath.updateValueOn(this.data, val);
+        super.write(this.data);
     }
 
     public removeVal(ref: string) {
         const parts = ref.split('.');
-        let curr = this.data;
-
-        for (let i = 0; i < parts.length - 1; i++) {
-            let key = parts[i];
-            if (curr.hasOwnProperty(key)) {
-                curr = curr[key];
-            } else {
-                throw new Error('Invalid object property reference given!');
-            }
-        }
-
-        const target_key = parts[parts.length - 1];
-        delete curr[target_key];
-        this.write(this.data);
+        const ppath = new PropertyPath(parts);
+        
+        ppath.removeValueFrom(this.data);
+        super.write(this.data);
     }
 
     public toRaw(data: JsonObject): string {
